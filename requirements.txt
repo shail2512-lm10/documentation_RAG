@@ -1,0 +1,10 @@
+llama-index
+python-dotenv
+requests
+beautifulsoup4
+qdrant-client
+llama-index-llms-huggingface
+llama-index-embeddings-huggingface
+llama-index-vector-stores-qdrant
+unstructured
+bitsandbytes
