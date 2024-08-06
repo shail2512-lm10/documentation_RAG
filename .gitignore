@@ -169,3 +169,4 @@ llamaindex-docs-tmp
 llamaindex-docs
 .lightning_studio/
 .vscode/
+hf_cache

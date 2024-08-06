@@ -8,3 +8,4 @@ llama-index-embeddings-huggingface
 llama-index-vector-stores-qdrant
 unstructured
 bitsandbytes
+flash_attn
