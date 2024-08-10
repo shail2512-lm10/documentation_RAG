@@ -8,3 +8,19 @@ services:
       - "6334:6334"
     volumes:
       - "./qdrant_storage:/qdrant/storage:z"
+
+
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    runtime: nvidia
+    image: cloud-rag:1.0
+    env_file: .env
+    volumes:
+      - ./hf_cache:/app/hf_cache
+    ports:
+      - 8501:8501
+    depends_on:
+      - qdrant
+    command: bash -c "streamlit run app.py"

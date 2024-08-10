@@ -170,3 +170,6 @@ llamaindex-docs
 .lightning_studio/
 .vscode/
 hf_cache
+llamaindex
+langchain
+qdrant_storage

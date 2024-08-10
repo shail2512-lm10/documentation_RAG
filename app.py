@@ -8,12 +8,15 @@ import uuid
 from collections import defaultdict
 
 from IPython.display import Markdown, display
+from huggingface_hub import login
 
 from rag import RAG
-from retriever import Retriever
 
 import streamlit as st
 
+
+HF_TOKEN = os.getenv("HF_API_KEY")
+login(HF_TOKEN)
 
 class QueryEngine:
 
@@ -44,21 +47,9 @@ def reset_chat():
     st.session_state.context = None
     gc.collect()
 
-# Sidebar
-st.sidebar.header("What would you like to do❓")
-# Add radio buttons for selection
 
-# Initialize or update engine type in session state
-
-
-col1, col2 = st.columns([6, 1])
-
-with col1:
-    st.header(f"RAG over LlamaIndex docs! 🚀")
-
-
-with col2:
-    st.button("Clear ↺", on_click=reset_chat)
+st.header(f"RAG over LlamaIndex docs! 🚀")
+st.button("Clear the chat❓ ↺", on_click=reset_chat)
 
 # Initialize chat history
 if "messages" not in st.session_state:
@@ -70,7 +61,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # Accept user input
-if prompt := st.chat_input("What's up?"):
+if prompt := st.chat_input("What's on your mind?"):
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
     # Display user message in chat message container
