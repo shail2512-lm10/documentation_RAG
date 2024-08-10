@@ -3,6 +3,7 @@ import logging
 from pprint import pprint
 from qdrant_client import QdrantClient, models
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from utils import start_qdrant_client
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -17,7 +18,7 @@ class Retriever:
         self.qdrant_client = self._start_qdrant_client()
 
     def _start_qdrant_client(self):
-        client = QdrantClient(url="http://localhost:6333", prefer_grpc=True, timeout=1000)
+        client = start_qdrant_client()
         return client
 
     def _load_embed_model(self):
