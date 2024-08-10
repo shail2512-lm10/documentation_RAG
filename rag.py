@@ -3,20 +3,11 @@ from prompt_template import qa_prompt_tmpl_str
 from llama_index.llms.huggingface import HuggingFaceLLM
 from transformers import BitsAndBytesConfig
 import torch
-from dotenv import load_dotenv
-import os
-from huggingface_hub import login
 
-
-
-load_dotenv()
-
-HF_TOKEN = os.environ.get("HF_API_KEY")
-login(HF_TOKEN)
 
 class RAG:
 
-    def __init__(self, llm_name: str = "meta-llama/Meta-Llama-3.1-8B-Instruct", request_timeout: float = 100.0):
+    def __init__(self, llm_name: str = "meta-llama/Meta-Llama-3.1-8B", request_timeout: float = 100.0):
         self.request_timeout = request_timeout
         self.llm_name = llm_name
         self.retriever = Retriever()
@@ -32,13 +23,13 @@ class RAG:
 
         llm = HuggingFaceLLM(model_name=self.llm_name,
         tokenizer_name=self.llm_name,
-        context_window=3900,
-        max_new_tokens=256,
+        context_window=32000,
+        max_new_tokens=512,
         model_kwargs={"quantization_config": quantization_config},
         generate_kwargs={"temperature": 0.7, "top_k": 50, "top_p": 0.95},
         # messages_to_prompt=messages_to_prompt,
         # completion_to_prompt=completion_to_prompt,
-        device_map="auto")
+        device_map="auto", cache_folder="./hf_cache")
 
         return llm
 
