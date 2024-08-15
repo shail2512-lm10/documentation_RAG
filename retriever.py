@@ -11,19 +11,14 @@ logger = logging.getLogger(__name__)
 
 class Retriever:
 
-    def __init__(self, embed_model_name="dunzhang/stella_en_1.5B_v5", collection_name="binary-quantization"):
-        self.embed_model_name = embed_model_name
+    def __init__(self, embedding, collection_name="binary-quantization"):
         self.collection_name = collection_name
-        self.embed_model = self._load_embed_model()
+        self.embed_model = embedding()
         self.qdrant_client = self._start_qdrant_client()
 
     def _start_qdrant_client(self):
         client = start_qdrant_client()
         return client
-
-    def _load_embed_model(self):
-        embed_model = HuggingFaceEmbedding(model_name=self.embed_model_name, trust_remote_code=True, cache_folder="./hf_cache")
-        return embed_model
 
     def search(self, query):
         query_embedding = self.embed_model.get_query_embedding(query)
