@@ -23,7 +23,7 @@ class DataPrep():
         documents = dir_reader.load_data(show_progress=True, num_workers=4)
 
         node_parser = SimpleNodeParser.from_defaults(chunk_size=500, chunk_overlap=20)
-        chunks = node_parser.get_nodes_from_documents(documents=documents, show_progress=True)
+        chunks = node_parser.get_nodes_from_documents(documents=documents, show_progress=True, num_workers=4)
 
         return chunks
 

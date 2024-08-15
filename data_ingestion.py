@@ -21,7 +21,7 @@ def upload_collection_to_vector_store(vectors, payload, client):
         if not client.collection_exists(collection_name=COLLECTION_NAME):
             client.create_collection(
                 collection_name=COLLECTION_NAME,
-                vectors_config=models.VectorParams(size=8192, distance=models.Distance.COSINE, on_disk=True),
+                vectors_config=models.VectorParams(size=1024, distance=models.Distance.COSINE, on_disk=True),
                 optimizers_config=models.OptimizersConfigDiff(default_segment_number=5, indexing_threshold=0),
                 quantization_config=models.BinaryQuantization(binary=models.BinaryQuantizationConfig(always_ram=True)),
                 shard_number=4
@@ -48,10 +48,9 @@ def upload_collection_to_vector_store(vectors, payload, client):
 
 def main(ingestion_dir: str, indexing: bool = False):
     
+    client = start_qdrant_client()
+    
     if indexing == False:
-
-        client = start_qdrant_client()
-
         dataprep = DataPrep(input_dir=ingestion_dir)
         chunks = dataprep.load_parse_chunk_data()
         vectors, payload = dataprep.vectorize(chunks=chunks)
@@ -70,4 +69,4 @@ def main(ingestion_dir: str, indexing: bool = False):
 
 if __name__ == "__main__":
     
-    main(ingestion_dir="/teamspace/studios/this_studio/langchain", indexing=False)
+    main(ingestion_dir="/teamspace/studios/this_studio/diffusers", indexing=False)
