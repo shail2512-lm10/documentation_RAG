@@ -7,7 +7,7 @@ services:
       - "6333:6333"
       - "6334:6334"
     volumes:
-      - "./qdrant_storage:/qdrant/storage:z"
+      - "qdrant_data:/qdrant/storage:z"
 
 
   streamlit:
@@ -15,12 +15,16 @@ services:
       context: .
       dockerfile: Dockerfile
     runtime: nvidia
-    image: cloud-rag:1.0
-    env_file: .env
+    image: docs-rag:1.0
     volumes:
-      - ./hf_cache:/app/hf_cache
+      - hf_data:/app/hf_cache
+      - qdrant_data:/app/qdrant_storage
     ports:
       - 8501:8501
     depends_on:
       - qdrant
-    command: bash -c "streamlit run app.py"
+    command: bash -c "entrypoint.sh"
+
+volumes:
+  hf_data:
+  qdrant_data:
