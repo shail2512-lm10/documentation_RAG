@@ -173,3 +173,5 @@ hf_cache
 llamaindex
 langchain
 qdrant_storage
+transformers
+diffusers

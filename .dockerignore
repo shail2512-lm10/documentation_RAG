@@ -2,10 +2,11 @@
 
 *.ipynb
 
-nltk_data/
 llamaindex-docs-tmp
 llamaindex-docs
 .lightning_studio/
 .vscode/
-hf_cache
-qdrant_storage
+langchain
+llamaindex
+transformers
+diffusers
