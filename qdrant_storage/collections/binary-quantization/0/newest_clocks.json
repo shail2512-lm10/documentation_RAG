@@ -1,1 +1,1 @@
-{"clocks":[{"peer_id":4379325418049438,"clock_id":0,"current_tick":1,"token":10456911749040519332}]}
+{"clocks":[{"peer_id":4379325418049438,"clock_id":2,"current_tick":6,"token":303258632492764471},{"peer_id":4379325418049438,"clock_id":3,"current_tick":1,"token":18058388066631423033},{"peer_id":4379325418049438,"clock_id":1,"current_tick":70,"token":14143541814689600319},{"peer_id":4379325418049438,"clock_id":0,"current_tick":2431,"token":6750766772860724476}]}
